@@ -1,0 +1,25 @@
+== Ares
+
+Simple library for querying Ares system in Czech republic with translation of
+labels.
+
+  http://wwwinfo.mfcr.cz/ares/ares.html.cz
+
+== Usage
+
+Is simple as creating ares instance by finder and calling methods on it:
+
+  ares = Ares.find(:ico => '27386830')
+  ares.found? == true
+  ares.company_name == "GravaStar s.r.o."
+  ares.subject_type == "P"
+  ares.address == {
+    :city => "16000 Praha",
+    :street => "Charlese de Gaulla 800/3",
+    :country => "Česká republika"
+  }
+  ares = Ares.find(:ico => '666')
+  ares.found? == false
+
+It should be posible to find by other attributes, but is not tested. Also
+subject type F needs more testing (see rake test:rcov).
