@@ -149,6 +149,17 @@ TEST_XML
       ares = Ares.find(:ico => '27386830')
       ares.subject_type.should == 'P'
     end
+
+    it "should parse address" do
+      mock_found
+      ares = Ares.find(:ico => '27386830')
+      ares.address.is_a?(Hash).should be_true
+      ares.address.should == {
+        :city => "Praha 6",
+        :street => "Charlese de Gaulla 800/3",
+        :zip => '16000'
+      }
+    end
   end
 end
 

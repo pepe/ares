@@ -53,6 +53,24 @@ class Ares
                       else
                         "F"
                       end
-    
+  end
+
+  # returns address
+  def address
+    @address ||= {
+      :city => self.raw_address['PSC'][0..0] == "1" ? self.raw_address['Nazev_mestske_casti'] : self.raw_address['Nazev_obce'],
+      :street => [self.raw_address["Nazev_ulice"], [self.raw_address['Cislo_domovni'],self.raw_address['Cislo_orientacni']].compact.join('/')].join(' '),
+      :zip => self.raw_address['PSC']
+       
+    }
+  end
+
+  # returns raw address
+  def raw_address
+    @raw_address ||= if self.subject_type == "P"
+                   self.answer["Identifikace"]["Adresa_ARES"]
+                 else
+                   self.answer["Identifikace"]["Osoba"]["Bydliste"]
+                 end
   end
 end
