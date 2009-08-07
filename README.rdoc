@@ -21,5 +21,5 @@ Is simple as creating ares instance by finder and calling methods on it:
   ares = Ares.find(:ico => '666')
   ares.found? == false
 
-It should be posible to find by other attributes, but is not tested. Also
-subject type F needs more testing (see rake test:rcov).
+It should be posible to find by company name (obchodni_firma='GravaStar s.r.o.'), but is not tested. Also
+subject type F needs more testing (see rake test:rcov)
