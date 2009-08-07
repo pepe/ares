@@ -1,4 +1,4 @@
-== Ares
+= Ares
 
 Simple library for querying Ares system in Czech republic with translation of
 labels.
@@ -24,12 +24,12 @@ Is simple as creating ares instance by finder and calling methods on it:
 It should be posible to find by company name, but is not tested. Also subject
 type F needs more testing (see rake test:rcov).
 
-= Dependencies
+== Dependencies
 
 Only active support for Hash.from_xml. Maybe it should be redone with something
 less fat.
 
-= License
+== License
 
 Copyright (c) 2008 pepe@gravastar.cz
 
