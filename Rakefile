@@ -23,3 +23,10 @@ namespace :test do
     t.rcov_opts = ['--exclude', 'spec']
   end
 end
+
+namespace :gems do
+  desc "Install gems"
+  task :install do
+    exec 'gem install activesupport'
+  end
+end
