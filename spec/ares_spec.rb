@@ -71,7 +71,7 @@ describe "ares" do
       </are:Odpoved>
       </are:Ares_odpovedi>
 TEST_XML
-    Net::HTTP.stub!(:get_print).and_return(@test_xml)
+    Net::HTTP.stub!(:get).and_return(@test_xml)
   end
 
   # mocks net/http to return empty result
@@ -85,7 +85,7 @@ TEST_XML
       </are:Odpoved>
       </are:Ares_odpovedi>
 TEST_XML
-    Net::HTTP.stub!(:get_print).and_return(@test_xml)
+    Net::HTTP.stub!(:get).and_return(@test_xml)
   end
 
   describe "initialization and basic methods" do

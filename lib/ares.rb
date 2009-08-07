@@ -15,7 +15,8 @@ class Ares
   # initializes new ares object 
   def initialize(options)
     @options = options
-    @result = Hash.from_xml(Net::HTTP.get_print(URI.parse(SERVICE_URL % self.params)))
+    @result = Hash.from_xml(Net::HTTP.get(URI.parse(SERVICE_URL % self.params)))
+    return self
   end
 
   # returns true if subject found on ares, otherwise false
