@@ -157,7 +157,8 @@ TEST_XML
       ares.address.should == {
         :city => "Praha 6",
         :street => "Charlese de Gaulla 800/3",
-        :zip => '16000'
+        :zip => '16000',
+        :country => "Česká republika"
       }
     end
   end

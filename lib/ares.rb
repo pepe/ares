@@ -57,11 +57,15 @@ class Ares
 
   # returns address
   def address
-    @address ||= {
+    unless @address 
+      @address = {
       :city => self.raw_address['dtt:PSC'][0..0] == "1" ? self.raw_address['dtt:Nazev_mestske_casti'] : self.raw_address['dtt:Nazev_obce'],
       :street => [self.raw_address["dtt:Nazev_ulice"], [self.raw_address['dtt:Cislo_domovni'], self.raw_address['dtt:Cislo_orientacni']].compact.join('/')].join(' '),
       :zip => self.raw_address['dtt:PSC']
     }
+      @address[:country] = "Česká republika" if self.raw_address['dtt:Kod_statu'].to_i == 203
+    end
+    return @address
   end
 
   # returns raw address
