@@ -27,7 +27,7 @@ end
 namespace :gems do
   desc "Install gems"
   task :install do
-    exec 'gem install activesupport'
+    exec 'gem install crack'
   end
 end
 
@@ -40,7 +40,7 @@ begin
     gem.homepage = "http://github.com/pepe/ares"
     gem.authors = ["Josef Pospisil"]
     gem.description = "Simple library for querying Ares system in Czech republic with translation of labels."
-    gem.add_dependency('activesupport', '>= 1.4.0')
+    gem.add_dependency('crack', '>= 0.1.4')
     IGNORE = [/\.gitignore$/, /VERSION$/]
     gem.files.reject! { |f| IGNORE.any? { |re| f.match(re) } }
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
