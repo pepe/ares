@@ -45,7 +45,7 @@ class Ares
 
   # returns ico
   def ico
-    @company_name ||= self.answer["are:ICO"]
+    @ico ||= self.answer["are:ICO"]
   end
 
   # returns subject type
