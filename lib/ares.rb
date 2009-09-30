@@ -28,9 +28,14 @@ class Ares
 
   # returns params like concatenated options
   def params
-    @params ||= options.inject([]) do |res, pair|
+    @options = @options.inject({}) do |opts, (key, value)| 
+      opts[key.to_s] = value 
+      opts[key.to_s || key] = value 
+      opts 
+    end 
+    @params ||= URI.escape(@options.sort.inject([]) do |res, pair|
        res << "%s=%s" % [pair.first, pair.last]
-    end.join('&')
+    end.join('&'))
   end
 
   # returns just answer part
@@ -60,7 +65,9 @@ class Ares
     unless @address 
       @address = {
       :city => self.raw_address['dtt:PSC'][0..0] == "1" ? self.raw_address['dtt:Nazev_mestske_casti'] : self.raw_address['dtt:Nazev_obce'],
-      :street => [self.raw_address["dtt:Nazev_ulice"], [self.raw_address['dtt:Cislo_domovni'], self.raw_address['dtt:Cislo_orientacni']].compact.join('/')].join(' '),
+      :street => [street_name, building_number].join(' '),
+      :street_name => street_name,
+      :building_number => building_number,
       :zip => self.raw_address['dtt:PSC']
     }
       @address[:country] = "Česká republika" if self.raw_address['dtt:Kod_statu'].to_i == 203
@@ -73,5 +80,17 @@ class Ares
     @raw_address ||= if self.subject_type == "P"
                    self.answer["are:Identifikace"]["are:Adresa_ARES"]
                  end
+  end
+
+  private
+  # returns street name
+  def street_name
+    self.raw_address["dtt:Nazev_ulice"] 
+  end
+
+  # returns building number
+  def building_number
+    [self.raw_address['dtt:Cislo_domovni'],
+      self.raw_address['dtt:Cislo_orientacni']].compact.join('/')
   end
 end

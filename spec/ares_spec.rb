@@ -85,7 +85,7 @@ TEST_XML
       </are:Odpoved>
       </are:Ares_odpovedi>
 TEST_XML
-    Net::HTTP.stub!(:get).and_return(@test_xml)
+    Net::HTTP.should_receive(:get).at_least(:once).and_return(@test_xml)
   end
 
   describe "initialization and basic methods" do
@@ -101,7 +101,7 @@ TEST_XML
 
     it "should store options" do
       ares = Ares.find(:ico => '666')
-      ares.options.should == {:ico => '666'}
+      ares.options.should == {"ico" => '666'}
     end
 
     it "should have params with equal sign concatenated options" do
@@ -128,6 +128,12 @@ TEST_XML
       mock_found
       ares = Ares.find(:ico => '27386830')
       ares.found?.should be_true
+    end
+
+    it "should not find when there are URI not suitable chars" do
+      mock_not_found
+      ares = Ares.find(:ico => '27386 830')
+      ares.found?.should be_false
     end
   end
 
@@ -157,6 +163,8 @@ TEST_XML
       ares.address.should == {
         :city => "Praha 6",
         :street => "Charlese de Gaulla 800/3",
+        :street_name => "Charlese de Gaulla",
+        :building_number => "800/3",
         :zip => '16000',
         :country => "Česká republika"
       }
