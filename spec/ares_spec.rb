@@ -94,21 +94,26 @@ TEST_XML
     end
 
     it "should be created by finder" do
+      mock_found
       ares = Ares.find(:ico => '666')
       ares.should_not be_nil
       ares.class.should == Ares
     end
 
     it "should store options" do
+      mock_found
       ares = Ares.find(:ico => '666')
       ares.options.should == {"ico" => '666'}
     end
 
     it "should have params with equal sign concatenated options" do
+      mock_found
       ares = Ares.find(:ico => '27386830')
       ares.params.should == "ico=27386830" 
       ares = Ares.find(:ico => '27386830', :obchodni_firma => 'Grava')
       ares.params.should == "ico=27386830&obchodni_firma=Grava" 
+      ares = Ares.find(:ico => '27386 830')
+      ares.params.should == "ico=27386830" 
     end
 
     it "should have result with hash from xml" do
@@ -130,9 +135,15 @@ TEST_XML
       ares.found?.should be_true
     end
 
-    it "should not find when there are URI not suitable chars" do
+    it "should not find when there is ico with not suitable chars" do
       mock_not_found
-      ares = Ares.find(:ico => '27386 830')
+      ares = Ares.find(:ico => '27386$830')
+      ares.found?.should be_false
+    end
+
+    it "should find when there is ico with spaces in it" do
+      mock_not_found
+      ares = Ares.find(:ico => '27386$830')
       ares.found?.should be_false
     end
   end

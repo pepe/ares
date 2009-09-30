@@ -28,11 +28,7 @@ class Ares
 
   # returns params like concatenated options
   def params
-    @options = @options.inject({}) do |opts, (key, value)| 
-      opts[key.to_s] = value 
-      opts[key.to_s || key] = value 
-      opts 
-    end 
+    sanitize_options
     @params ||= URI.escape(@options.sort.inject([]) do |res, pair|
        res << "%s=%s" % [pair.first, pair.last]
     end.join('&'))
@@ -92,5 +88,15 @@ class Ares
   def building_number
     [self.raw_address['dtt:Cislo_domovni'],
       self.raw_address['dtt:Cislo_orientacni']].compact.join('/')
+  end
+
+  # sanitizes url options 
+  def sanitize_options
+    @options = @options.inject({}) do |opts, (key, value)| 
+      opts[key.to_s] = value 
+      opts[key.to_s || key] = value 
+      opts 
+    end 
+    @options['ico'] = @options['ico'].gsub(/ /, '')
   end
 end
