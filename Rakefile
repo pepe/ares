@@ -34,7 +34,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "ares_cz"
     gem.summary = %Q{Simple ruby wrapper for Czech Ares service}
-    gem.email = "pepe@gravastar.cz"
+    gem.email = "josef.pospisil@laststar.eu"
     gem.homepage = "http://github.com/pepe/ares"
     gem.authors = ["Josef Pospisil"]
     gem.description = "Simple library for querying Ares system in Czech republic with translation of labels."

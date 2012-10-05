@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["Josef Pospisil"]
   s.date = "2012-10-05"
   s.description = "Simple library for querying Ares system in Czech republic with translation of labels."
-  s.email = "pepe@gravastar.cz"
+  s.email = "josef.pospisil@laststar.eu"
   s.extra_rdoc_files = [
     "README.rdoc"
   ]
