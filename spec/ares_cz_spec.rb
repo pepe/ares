@@ -1,6 +1,6 @@
 require 'rubygems'
-require 'spec'
-require 'lib/ares'
+require 'rspec'
+require 'lib/ares_cz'
 
 SERVICE_URL = "http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_std.cgi?%s".freeze
 describe "ares" do
