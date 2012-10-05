@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
   s.files = [
     "README.rdoc",
     "Rakefile",
-    "ares_cz.gemspec"
+    "ares_cz.gemspec",
+    "lib/ares_cz.rb",
+    "spec/ares_cz_spec.rb"
   ]
   s.homepage = "http://github.com/pepe/ares"
   s.require_paths = ["lib"]
