@@ -1,24 +1,22 @@
 require 'rubygems'
 require 'rake'
 require 'ftools'
-require 'spec'
-require 'spec/rake/spectask'
+require 'rspec'
+require 'rspec/core/rake_task'
 
 desc "Runs all specs as default"
 task :default => 'test:spec'
 
 namespace :test do
   desc "Run all specs"
-  Spec::Rake::SpecTask.new do |t|
-    t.spec_files = FileList['spec/*_spec.rb']
-    t.spec_opts = ['-u']
+  RSpec::Core::RakeTask.new do |t|
+    t.pattern = 'spec/erector/*_spec.rb'    
+    t.rspec_opts = ['-u']
   end
 
-
-
   desc "Run all examples with RCov"
-  Spec::Rake::SpecTask.new('rcov') do |t|
-    t.spec_files = FileList['spec/*_spec.rb']
+  RSpec::Core::RakeTask.new('rcov') do |t|
+    t.pattern = 'spec/erector/*_spec.rb'    
     t.rcov = true
     t.rcov_opts = ['--exclude', 'spec']
   end
@@ -34,9 +32,9 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "ares"
+    gem.name = "ares_cz"
     gem.summary = %Q{Simple ruby wrapper for Czech Ares service}
-    gem.email = "pepe@gravastar.cz"
+    gem.email = "josef.pospisil@laststar.eu"
     gem.homepage = "http://github.com/pepe/ares"
     gem.authors = ["Josef Pospisil"]
     gem.description = "Simple library for querying Ares system in Czech republic with translation of labels."

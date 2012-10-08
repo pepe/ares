@@ -8,6 +8,9 @@ labels.
 == Usage
 
 Is simple as creating ares instance by finder and calling methods on it:
+  
+  require 'rubygems'
+  require 'ares_cz'
 
   ares = Ares.find(:ico => '27386830')
   ares.found? == true
